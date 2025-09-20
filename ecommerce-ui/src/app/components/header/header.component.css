@@ -1,0 +1,57 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); */
+  border-radius: 0 0 12px 12px;
+  margin:0px 0px 0px 0px;
+
+  .logo {
+    color: #2a7de1;
+    font-weight: 700;
+    a{
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  .search {
+    position: relative;
+    input {
+      background-color: #fafafa;
+      border-radius: 24px;
+      padding: 8px 16px;
+      border: none;
+      width: 20vw;
+      margin-right: 100px;
+    }
+    input:focus {
+      outline: none; /* removes default glow */
+      border: 1px solid #0077ff; /* your theme color */
+      box-shadow: 0 0 4px rgba(0, 119, 255, 0.4); /* optional glow */
+    }
+    span{
+  position: absolute;
+    right: 105px;
+    top: 5px;
+    }
+  }
+
+  .nav {
+    ul {
+      display: flex;
+      list-style: none;
+      gap: 50px;
+      font-weight: 500;
+      color: #333333;
+
+    li a{
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
+    }
+  }
+}
+

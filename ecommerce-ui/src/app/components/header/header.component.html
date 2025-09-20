@@ -1,0 +1,30 @@
+<div class="header">
+  <div class="logo">
+    <h1><a routerLink="/">ShopEase</a></h1>
+  </div>
+
+  @if (menuType==='DEFAULT') {
+  <div class="search">
+    <input type="text" placeholder="Search for products" />
+    <span class="material-symbols-outlined"> search </span>
+  </div>
+  }
+
+  <div class="nav">
+    @switch (menuType) { @case ('SELLER') {
+    <ul>
+      <li><a routerLink="/">Add Product</a></li>
+      <li><a>List Product</a></li>
+      <li><a (click)="logOut()">Logout</a></li>
+      <li><a style="cursor: none;">{{sellerName | uppercase}}</a></li>
+    </ul>
+    } @default {
+    <ul>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/seller-auth">Seller</a></li>
+      <li><a>Login</a></li>
+      <li><a>Cart(0)</a></li>
+    </ul>
+    } }
+  </div>
+</div>
