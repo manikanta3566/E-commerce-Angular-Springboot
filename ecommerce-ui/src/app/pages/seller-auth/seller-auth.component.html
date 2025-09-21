@@ -1,36 +1,69 @@
-
 @if (isLoginForm) {
-<div class="form-section">
-  <div class="form-container" style="height: 42vh;">
-    <h1>Seller Login</h1>
-    <form [formGroup]="loginForm" style="height: 17vh;">
-      <p>Email</p>
-      <input type="text" formControlName="username"/>
-      <p>Password</p>
-      <input type="password" formControlName="password"/>
-    </form>
-    <button class="btn-primary" (click)="onLogin()">Login</button>
+<div class="form-container">
+  <h2 class="form-title">Seller Login</h2>
+
+  <form [formGroup]="loginForm">
+    <!-- Email -->
+    <div class="form-group">
+      <label for="name">Email</label>
+      <input
+        type="text"
+        formControlName="username"
+        placeholder="Enter the Email"
+      />
+    </div>
+
+    <!-- password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Enter the Password"
+      />
+    </div>
+
+    <!-- Submit -->
+    <button class="btn-submit" (click)="onLogin()">Login</button>
     @if (isError) {
-      <p style="color: red;padding-left: 40px;">Invalid Email or Password</p>
+    <p style="color: red; margin-top: 10px;">Invalid Email or Password</p>
     }
-    <p class="login-txt">Dont't have an account? <a (click)="toggleSignupForm()"> Sign Up</a></p>
-  </div>
+    <p class="login-txt">
+      Dont't have an account? <a (click)="toggleSignupForm()"> Sign Up</a>
+    </p>
+  </form>
 </div>
-}
-@else {
-  <div class="form-section">
+} @else {
   <div class="form-container">
-    <h1>Seller Sign Up</h1>
-    <form [formGroup]="signUpForm">
-      <p>Name</p>
-      <input type="text" formControlName="name"/>
-      <p>Email</p>
-      <input type="text" formControlName="email"/>
-      <p>Password</p>
-      <input type="password" formControlName="password"/>
-    </form>
-    <button class="btn-primary" (click)="onSignup()">Sign Up</button>
-    <p class="login-txt">Already have an account? <a (click)="toggleLoginForm()">Login</a></p>
+  <h2 class="form-title">Seller Login</h2>
+<form [formGroup]="signUpForm">
+  <!-- Name -->
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" formControlName="name" placeholder="Enter the Name" />
   </div>
+
+  <!-- Email -->
+  <div class="form-group">
+    <label for="name">Email</label>
+    <input type="text" formControlName="email" placeholder="Enter the Email" />
+  </div>
+
+  <!-- password -->
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Enter the Password"
+    />
+  </div>
+
+  <!-- Submit -->
+  <button class="btn-submit" (click)="onSignup()">Sign Up</button>
+  <p class="login-txt">
+    Already have an account? <a (click)="toggleLoginForm()">Login</a>
+  </p>
+</form>
 </div>
 }

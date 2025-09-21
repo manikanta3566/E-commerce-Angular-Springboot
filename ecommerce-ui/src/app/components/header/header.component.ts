@@ -20,12 +20,15 @@ export class HeaderComponent {
 
   ngOnInit(){
     this.router.events.subscribe((data:any)=>{
-      console.log(data.url);
-      
-      if(data.url==='/seller-home'){
-        const userStr = localStorage.getItem('user');
-        this.sellerName = userStr ? JSON.parse(userStr).name : '';
-        this.menuType='SELLER';
+      const userStr = localStorage.getItem('user');
+      const userData=userStr ? JSON.parse(userStr):'';
+      if(userData){
+        this.sellerName = userData.name;
+        if(userData.roles[0]==='SELLER'){
+          this.menuType='SELLER';
+        }else{
+          this.menuType='DEFAULT';
+        }
       }else{
         this.menuType='DEFAULT';
       }
