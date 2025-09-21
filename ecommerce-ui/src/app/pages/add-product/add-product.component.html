@@ -1,23 +1,23 @@
 <div class="form-container">
   <h2 class="form-title">Add Product</h2>
 
-  <form>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <!-- Product Name -->
     <div class="form-group">
       <label for="name">Product Name</label>
-      <input type="text" id="name" name="name" placeholder="Enter product name" />
+      <input type="text" id="name" name="name" placeholder="Enter product name"  formControlName="name"/>
     </div>
 
     <!-- Price -->
     <div class="form-group">
       <label for="price">Price</label>
-      <input type="number" id="price" name="price" placeholder="Enter price" />
+      <input type="number" id="price" name="price" placeholder="Enter price" formControlName="price"/>
     </div>
 
     <!-- Category -->
     <div class="form-group">
       <label for="category">Category</label>
-      <select id="category" name="category">
+      <select id="category" name="category" formControlName="category">
         <option value="">-- Select category --</option>
         <option value="electronics">Electronics</option>
         <option value="fashion">Fashion</option>
@@ -29,16 +29,16 @@
     <!-- Description -->
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea id="description" name="description" rows="4" placeholder="Enter product description"></textarea>
+      <textarea id="description" name="description" rows="4" placeholder="Enter product description" formControlName="description"></textarea>
     </div>
 
     <!-- Image Upload -->
     <div class="form-group">
       <label for="image">Upload Image</label>
-      <input type="file" id="image" name="image" />
+      <input type="file" id="image" name="image" (change)="onFileChange($event)" #fileUpload/>
     </div>
 
     <!-- Submit -->
-    <button type="submit" class="btn-submit">Add Product</button>
+    <button type="submit" class="btn-submit" [disabled]="productForm.invalid">Add Product</button>
   </form>
 </div>
