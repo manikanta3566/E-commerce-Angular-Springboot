@@ -35,7 +35,7 @@ public class Product {
     private LocalDateTime updatedDate;
 
     @Lob
-    @Column(columnDefinition = "bytea")
+    @Column(name = "image_data")
     private byte[] imageData;
 
     public Product() {

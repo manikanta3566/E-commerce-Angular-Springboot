@@ -38,7 +38,7 @@ public class User implements UserDetails {
         return Optional.ofNullable(this.roles)
                 .orElse(Collections.emptySet())
                 .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
+                .map(role -> new SimpleGrantedAuthority("ROLE_"+role.getName().name()))
                 .collect(Collectors.toList());
     }
 
