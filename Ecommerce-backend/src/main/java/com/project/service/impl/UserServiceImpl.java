@@ -2,7 +2,7 @@ package com.project.service.impl;
 
 import com.project.Exception.GlobalException;
 import com.project.dto.UserDto;
-import com.project.entity.ErrorCode;
+import com.project.enums.ErrorCode;
 import com.project.entity.Role;
 import com.project.entity.User;
 import com.project.repository.RoleRepository;

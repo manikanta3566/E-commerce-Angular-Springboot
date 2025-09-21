@@ -1,4 +1,4 @@
-package com.project.entity;
+package com.project.enums;
 
 public enum ErrorCode {
     USER_NOT_FOUND("USER_NOT_FOUND", "User not found"),
@@ -11,7 +11,9 @@ public enum ErrorCode {
     ACCOUNT_LOCKED("ACCOUNT_LOCKED", "Account is locked"),
     TOKEN_EXPIRED("TOKEN_EXPIRED", "Token has expired"),
     UNAUTHORIZED_ACCESS("UNAUTHORIZED_ACCESS", "Unauthorized access"),
-    RESOURCE_NOT_FOUND("RESOURCE_NOT_FOUND", "Resource not found");
+    RESOURCE_NOT_FOUND("RESOURCE_NOT_FOUND", "Resource not found"),
+    PRODUCT_NOT_FOUND("PRODUCT_NOT_FOUND", "Product not found"),
+    ERROR_WHILE_SAVING_PRODUCT("ERROR_WHILE_SAVING_PRODUCT", "Error while saving product");
 
     private final String code;
     private final String message;

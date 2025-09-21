@@ -1,6 +1,6 @@
 package com.project.Exception;
 
-import com.project.entity.ErrorCode;
+import com.project.enums.ErrorCode;
 
 public class GlobalException extends RuntimeException {
     private final ErrorCode errorCode;
