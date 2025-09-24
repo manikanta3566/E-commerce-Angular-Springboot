@@ -1,6 +1,7 @@
 package com.project.service.impl;
 
 import com.project.Exception.GlobalException;
+import com.project.dto.PaginatedResponse;
 import com.project.dto.ProductDto;
 import com.project.entity.Product;
 import com.project.entity.User;
@@ -8,7 +9,11 @@ import com.project.enums.ErrorCode;
 import com.project.repository.ProductRepository;
 import com.project.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Base64;
 
@@ -37,5 +42,34 @@ public class ProductServiceImpl  implements ProductService {
         } catch (Exception e) {
             throw new GlobalException(ErrorCode.ERROR_WHILE_SAVING_PRODUCT);
         }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PaginatedResponse<ProductDto> getProducts(int pageNumber, int pageSize, User user) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Product> productsPage = productRepository.findAllByCreatedById(user.getId(),pageable);
+        PaginatedResponse<ProductDto> response = new PaginatedResponse<>();
+        response.setContent(productsPage.map(this::convertToDto).getContent());
+        response.setPageNumber(productsPage.getNumber());
+        response.setPageSize(productsPage.getSize());
+        response.setTotalElements(productsPage.getTotalElements());
+        response.setTotalPages(productsPage.getTotalPages());
+        response.setFirst(productsPage.isFirst());
+        response.setLast(productsPage.isLast());
+        return response;
+    }
+
+    private ProductDto convertToDto(Product product) {
+        String base64Image = Base64.getEncoder().encodeToString(product.getImageData());
+
+        return new ProductDto(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getDescription(),
+                product.getCategory(),
+                base64Image
+        );
     }
 }

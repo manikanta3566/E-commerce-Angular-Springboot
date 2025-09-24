@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.dto.GenricResponse;
+import com.project.dto.PaginatedResponse;
 import com.project.dto.ProductDto;
 import com.project.entity.User;
 import com.project.service.ProductService;
@@ -25,6 +26,15 @@ public class SellerProductController {
                 GenricResponse.success(productService.addProduct(productDTO, user), "Product created successfully"),
                 HttpStatus.CREATED
         );
+    }
+
+
+    @GetMapping
+    public ResponseEntity<GenricResponse<PaginatedResponse<ProductDto>>> getgetProductsPr(@RequestParam(defaultValue = "0") int pageNumber,
+                                                                                                    @RequestParam(defaultValue = "10") int pageSize,
+                                                                                                    @AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(GenricResponse.success(productService.getProducts(pageNumber, pageSize, user),
+                "Products fetched successfully"), HttpStatus.OK);
     }
 
 }
