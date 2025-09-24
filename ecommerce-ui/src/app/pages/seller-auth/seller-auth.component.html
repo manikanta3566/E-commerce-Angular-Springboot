@@ -25,9 +25,6 @@
 
     <!-- Submit -->
     <button class="btn-submit" (click)="onLogin()">Login</button>
-    @if (isError) {
-    <p style="color: red; margin-top: 10px;">Invalid Email or Password</p>
-    }
     <p class="login-txt">
       Dont't have an account? <a (click)="toggleSignupForm()"> Sign Up</a>
     </p>
@@ -60,7 +57,7 @@
   </div>
 
   <!-- Submit -->
-  <button class="btn-submit" (click)="onSignup()">Sign Up</button>
+  <button class="btn-submit" (click)="onSignup()" [disabled]="signUpForm.invalid">Sign Up</button>
   <p class="login-txt">
     Already have an account? <a (click)="toggleLoginForm()">Login</a>
   </p>

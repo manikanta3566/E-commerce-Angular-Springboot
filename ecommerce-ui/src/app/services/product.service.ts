@@ -12,4 +12,8 @@ export class ProductService {
   addProduct(data:any){
     return this.http.post(API_URLS.BASE_URL+API_URLS.SELLER_PRODUCT,data);
   }
+
+  getProducts(pageNumber:number,pageSize:number){
+    return this.http.get(`${API_URLS.BASE_URL}${API_URLS.SELLER_PRODUCT}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+  }
 }

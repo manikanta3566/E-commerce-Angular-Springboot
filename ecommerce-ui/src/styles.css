@@ -76,3 +76,6 @@ body {
 .btn-submit:hover {
   background-color: #005fcc;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

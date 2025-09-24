@@ -5,6 +5,11 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -16,9 +21,9 @@ import { Router } from '@angular/router';
 })
 export class SellerAuthComponent {
   isLoginForm: boolean = true;
-  isError: boolean = false;
-
-  constructor(private authService: AuthService, private router: Router) {}
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+  constructor(private authService: AuthService, private router: Router,private _snackBar:MatSnackBar) {}
 
   ngOnInit() {
     if (this.authService.isUserLoggedIn()) {
@@ -43,6 +48,13 @@ export class SellerAuthComponent {
       if (data) {
         this.signUpForm.reset();
       }
+    },(error)=>{
+      this._snackBar.open(error?.error?.message, 'Close', {
+      duration: 5000,
+      panelClass: ['error-snackbar'],
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
     });
   }
 
@@ -57,7 +69,7 @@ export class SellerAuthComponent {
       },
       (error) => {
         if(error){
-          this.isError=true;
+         
         }
       }
     );

@@ -1,0 +1,94 @@
+/* Table Container */
+.product-table-container {
+  margin: 20px;
+  padding: 20x;
+  background: #fdfdfd;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .custom-table {
+    .actions {
+      width: 100px !important;
+    }
+  }
+}
+
+.action-icon{
+    cursor: pointer;
+}
+
+.description-cell{
+    width: 300px;
+}
+
+.description-wrapper {
+  width: 300px;
+  max-height: 80px;        /* Fixed height */
+  overflow-y: auto;        /* Enable scrollbar */
+  white-space: normal;     /* Allow wrapping */
+  line-height: 1.4;
+}
+.description-wrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.description-wrapper::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
+} 
+
+.description-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #888;
+} 
+
+/* Override table background */
+::ng-deep .mat-mdc-table {
+  background: transparent !important;
+}
+
+/* Header Style */
+::ng-deep .mat-mdc-header-cell {
+  background:#2a7de1 !important;
+  color: white !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 12px;
+}
+
+/* Row Cells */
+::ng-deep .mat-mdc-cell {
+  /* padding: 10px !important; */
+  color: #2c3e50 !important;
+}
+
+/* Image Column */
+.product-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Buttons */
+.update-btn {
+  background: #27ae60 !important;
+  color: white !important;
+  margin-right: 8px;
+}
+
+.delete-btn {
+  background: #e74c3c !important;
+  color: white !important;
+}
+
+/* Paginator */
+::ng-deep .mat-mdc-paginator {
+  background: #fdfdfd !important;
+  color: #2c3e50 !important;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 12px 12px;
+}
+
+::ng-deep .cdk-overlay-container .mat-mdc-menu-panel {
+  background-color: white !important;
+}

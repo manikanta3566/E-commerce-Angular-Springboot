@@ -14,9 +14,9 @@
     @switch (menuType) { @case ('SELLER') {
     <ul>
       <li><a routerLink="/add-product">Add Product</a></li>
-      <li><a>List Product</a></li>
+      <li><a routerLink="/seller-home">Manage Products</a></li>
       <li><a (click)="logOut()">Logout</a></li>
-      <li><a style="cursor: none;">{{sellerName | uppercase}}</a></li>
+      <li><a style="cursor:text;">{{sellerName | uppercase}}</a></li>
     </ul>
     } @default {
     <ul>
