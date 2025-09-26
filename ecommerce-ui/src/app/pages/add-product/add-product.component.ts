@@ -12,6 +12,8 @@ import { ProductService } from '../../services/product.service';
 export class AddProductComponent {
   productForm: FormGroup;
   base64Image: string = '';
+  fileName:string=''
+  fileSize:number=0;
   @ViewChild('fileUpload') fileUpload!: ElementRef<HTMLInputElement>;
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = this.fb.group({
@@ -25,6 +27,8 @@ export class AddProductComponent {
   onFileChange(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
+      this.fileName=file.name;
+      this.fileSize=file.size;
       const reader = new FileReader();
       reader.onload = () => {
         const base64 = (reader.result as string).split(',')[1];
@@ -35,7 +39,6 @@ export class AddProductComponent {
   }
 
   onSubmit(): void {
-    console.log("submit");
     if (this.productForm.valid && this.base64Image) {
       const formValue = this.productForm.value;
       const payload = {
@@ -44,6 +47,8 @@ export class AddProductComponent {
         category: formValue.category,
         description: formValue.description,
         base64Image: this.base64Image,
+        imageFileName:this.fileName,
+        imageFileSize:this.fileSize
       };
 
       this.productService.addProduct(payload).subscribe((data: any) => {

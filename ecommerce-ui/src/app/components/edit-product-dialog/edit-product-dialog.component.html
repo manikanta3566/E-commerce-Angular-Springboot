@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>Edit Product</h2>
+<mat-dialog-content class="mat-typography" style="padding-top: 10px">
+  <form>
+    <p>
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Product Name</mat-label>
+        <input
+          matInput
+          placeholder="Placeholder"
+          [(ngModel)]="name"
+          name="name"
+        />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Product Price</mat-label>
+        <input
+          matInput
+          placeholder="Placeholder"
+          [(ngModel)]="price"
+          name="price"
+        />
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Select Category</mat-label>
+        <mat-select [(ngModel)]="selectedCategory" name="selectedCategory">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          placeholder="Enter the Description"
+          [(ngModel)]="description"
+          name="description"
+        ></textarea>
+      </mat-form-field>
+    </p>
+    <div style="display: flex; align-items: center; gap: 12px">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="fileInput.click()"
+        type="button"
+      >
+        Upload Image
+      </button>
+      <input #fileInput type="file" hidden (change)="onFileChange($event)" />
+      <span *ngIf="selectedFileName">{{ this.selectedFileName }}</span>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end" style="padding-top: 0">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    (click)="updateProduct()"
+  >
+    Update
+  </button>
+</mat-dialog-actions>
