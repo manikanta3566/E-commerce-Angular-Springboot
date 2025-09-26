@@ -31,6 +31,8 @@ public class ProductServiceImpl  implements ProductService {
             product.setPrice(productDTO.getPrice());
             product.setDescription(productDTO.getDescription());
             product.setCategory(productDTO.getCategory());
+            product.setImageFileName(productDTO.getImageFileName());
+            product.setImageFileSize(productDTO.getImageFileSize());
             // Decode Base64 string to byte[]
             if (productDTO.getBase64Image() != null && !productDTO.getBase64Image().isEmpty()) {
                 byte[] imageBytes = Base64.getDecoder().decode(productDTO.getBase64Image());
@@ -60,6 +62,42 @@ public class ProductServiceImpl  implements ProductService {
         return response;
     }
 
+    @Override
+    public String deleteProduct(String productId, User user) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new GlobalException(ErrorCode.PRODUCT_NOT_FOUND));
+        if (!product.getCreatedById().equals(user.getId())) {
+            throw new GlobalException(ErrorCode.UNAUTHORIZED_ACTION);
+        }
+        productRepository.deleteById(productId);
+        return productId;
+    }
+
+    @Override
+    public ProductDto updateProduct(String productId, ProductDto productDTO, User user) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new GlobalException(ErrorCode.PRODUCT_NOT_FOUND));
+        if (!product.getCreatedById().equals(user.getId())) {
+            throw new GlobalException(ErrorCode.UNAUTHORIZED_ACTION);
+        }
+        if (product != null) {
+            product.setName(productDTO.getName());
+            product.setPrice(productDTO.getPrice());
+            product.setDescription(productDTO.getDescription());
+            product.setCategory(productDTO.getCategory());
+            product.setImageFileName(productDTO.getImageFileName());
+            product.setImageFileSize(productDTO.getImageFileSize());
+            // Decode Base64 string to byte[]
+            if (productDTO.getBase64Image() != null && !productDTO.getBase64Image().isEmpty()) {
+                byte[] imageBytes = Base64.getDecoder().decode(productDTO.getBase64Image());
+                product.setImageData(imageBytes);
+            }
+            Product updatedProduct = productRepository.save(product);
+            return convertToDto(updatedProduct);
+        }
+        return null;
+    }
+
     private ProductDto convertToDto(Product product) {
         String base64Image = Base64.getEncoder().encodeToString(product.getImageData());
 
@@ -69,7 +107,9 @@ public class ProductServiceImpl  implements ProductService {
                 product.getPrice(),
                 product.getDescription(),
                 product.getCategory(),
-                base64Image
+                base64Image,
+                product.getImageFileName(),
+                product.getImageFileSize()
         );
     }
 }

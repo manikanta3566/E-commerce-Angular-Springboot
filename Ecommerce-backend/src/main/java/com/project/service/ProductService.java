@@ -9,4 +9,8 @@ public interface ProductService {
     ProductDto addProduct(ProductDto productDTO, User user);
 
     PaginatedResponse<ProductDto> getProducts(int pageNumber, int pageSize, User user);
+
+    String deleteProduct(String productId, User user);
+
+    ProductDto updateProduct(String productId, ProductDto productDTO, User user);
 }

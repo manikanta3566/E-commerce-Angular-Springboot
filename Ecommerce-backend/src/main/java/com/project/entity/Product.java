@@ -38,6 +38,11 @@ public class Product {
     @Column(name = "image_data")
     private byte[] imageData;
 
+    private String imageFileName;
+
+    @Column(name = "image_file_size", nullable = false, columnDefinition = "BIGINT DEFAULT 0")
+    private long imageFileSize;
+
     public Product() {
         this.id = java.util.UUID.randomUUID().toString();
     }

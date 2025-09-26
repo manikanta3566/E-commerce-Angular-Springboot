@@ -19,7 +19,7 @@ public class SellerProductController {
     private final ProductService productService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addProduct(
+    public ResponseEntity<GenricResponse<ProductDto>> addProduct(
             @RequestBody ProductDto productDTO,
             @AuthenticationPrincipal User user) {
         return new ResponseEntity<>(
@@ -35,6 +35,27 @@ public class SellerProductController {
                                                                                                     @AuthenticationPrincipal User user) {
         return new ResponseEntity<>(GenricResponse.success(productService.getProducts(pageNumber, pageSize, user),
                 "Products fetched successfully"), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<GenricResponse<String>> deleteProduct(
+            @PathVariable String productId,
+            @AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(
+                GenricResponse.success(productService.deleteProduct(productId,user), "Product deleted successfully"),
+                HttpStatus.OK
+        );
+    }
+
+    @PutMapping("/{productId}")
+    public ResponseEntity<GenricResponse<ProductDto>> deleteProduct(
+            @PathVariable String productId,
+            @RequestBody ProductDto productDTO,
+            @AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(
+                GenricResponse.success(productService.updateProduct(productId,productDTO,user), "Product updated successfully"),
+                HttpStatus.OK
+        );
     }
 
 }

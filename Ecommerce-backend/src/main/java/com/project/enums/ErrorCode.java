@@ -13,7 +13,8 @@ public enum ErrorCode {
     UNAUTHORIZED_ACCESS("UNAUTHORIZED_ACCESS", "Unauthorized access"),
     RESOURCE_NOT_FOUND("RESOURCE_NOT_FOUND", "Resource not found"),
     PRODUCT_NOT_FOUND("PRODUCT_NOT_FOUND", "Product not found"),
-    ERROR_WHILE_SAVING_PRODUCT("ERROR_WHILE_SAVING_PRODUCT", "Error while saving product");
+    ERROR_WHILE_SAVING_PRODUCT("ERROR_WHILE_SAVING_PRODUCT", "Error while saving product"),
+    UNAUTHORIZED_ACTION("UNAUTHORIZED_ACTION", "You are not authorized to perform this action");
 
     private final String code;
     private final String message;

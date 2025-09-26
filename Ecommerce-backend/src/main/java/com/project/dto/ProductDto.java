@@ -14,4 +14,6 @@ public class ProductDto {
     private String description;
     private String category;
     private String base64Image; // Image as Base64 encoded string
+    private String imageFileName;
+    private long imageFileSize;
 }
