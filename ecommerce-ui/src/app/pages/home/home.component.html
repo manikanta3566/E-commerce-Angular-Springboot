@@ -1,1 +1,57 @@
-<p>home works!</p>
+<div class="home-page-container">
+  <!-- Top Carousel -->
+  <div class="carousel-container">
+    <swiper-container
+      #swiper
+      init="false"
+      slides-per-view="3"
+      slides-per-group="1"
+      looped-slides="6"
+      space-between="15"
+      navigation="true"
+      pagination="true"
+      autoplay-disable-on-interaction="false"
+      pagination-clickable="true"
+      loop="true"
+      autoplay-delay="2000"
+
+      class="product-carousel"
+    >
+      <swiper-slide *ngFor="let p of swipperProducts">
+        <div class="carousel-card">
+          <img
+            [src]="
+              p.base64Image
+                ? 'data:image/jpeg;base64,' + p.base64Image
+                : 'https://m.media-amazon.com/images/I/41hyMMjlg2L._SR480,440_.jpg'
+            "
+            alt="{{ p.name }}"
+          />
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.price | currency : "INR" : "symbol" : "1.0-0" }}</p>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid-container">
+    <div class="product-card" *ngFor="let product of products">
+      <img
+        [src]="
+          product.base64Image
+            ? 'data:image/jpeg;base64,' + product.base64Image
+            : 'https://m.media-amazon.com/images/I/41hyMMjlg2L._SR480,440_.jpg'
+        "
+        alt="{{ product.name }}"
+      />
+      <h4>{{ product.name }}</h4>
+      <p>₹{{ product.price }}</p>
+      <button>Veiw Details</button>
+    </div>
+  </div>
+
+  <!-- Sentinel -->
+<div #scrollAnchor></div>
+</div>
+
