@@ -4,10 +4,22 @@
   </div>
 
   @if (menuType==='DEFAULT') {
-  <div class="search">
-    <input type="text" placeholder="Search for products" />
-    <span class="material-symbols-outlined"> search </span>
-  </div>
+<mat-form-field  appearance="outline" class="search-field">
+  <input
+    type="text"
+    placeholder="Search products"
+    matInput
+    [formControl]="searchControl"
+    [matAutocomplete]="auto"
+    (blur)="onSearchBlur()"
+  />
+
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let product of filteredProducts" [value]="product" (click)="onProductSelect(product)">
+      {{ product}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
   }
 
   <div class="nav">

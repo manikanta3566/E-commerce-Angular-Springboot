@@ -1,0 +1,20 @@
+<h1>Products</h1>
+<div class="searchContainer">
+  <div class="productCard" *ngFor="let product of searchProducts">
+    <div class="image-container">
+      <img
+        [src]="
+          product.base64Image
+            ? 'data:image/jpeg;base64,' + product.base64Image
+            : 'https://m.media-amazon.com/images/I/41hyMMjlg2L._SR480,440_.jpg'
+        "
+      />
+    </div>
+    <div class="product-search-info">
+      <p style="color: #1f2937;font-size: 30px;">{{product.name}}</p>
+      <p style="color: #6b7280;">{{product.description}}</p>
+      <p style="color: #1f2937">{{product.price}}</p>
+      <button class="btn-submit">Add to Cart</button>
+    </div>
+  </div>
+</div>

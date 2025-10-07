@@ -14,7 +14,7 @@ export class ProductService {
   }
 
   getProducts(pageNumber:number,pageSize:number){
-    return this.http.get(`${API_URLS.BASE_URL}${API_URLS.SELLER_PRODUCT}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    return this.http.get(`${API_URLS.BASE_URL}${API_URLS.PUBLIC_LISTING_API}?pageNumber=${pageNumber}&pageSize=${pageSize}`)
   }
 
   deleteProduct(productId:string){
@@ -23,5 +23,9 @@ export class ProductService {
 
   updateProduct(productId:string,data:any){
     return this.http.put(`${API_URLS.BASE_URL}${API_URLS.SELLER_PRODUCT}/${productId}`,data);
+  }
+
+  searchProducts(query:string){
+    return this.http.get(`${API_URLS.BASE_URL}${API_URLS.PUBLIC_SEARCH_API}?query=${query}`)
   }
 }

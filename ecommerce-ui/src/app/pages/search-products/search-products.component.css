@@ -1,0 +1,45 @@
+h1 {
+  padding-left: 150px;
+  font-weight: 600;
+  font-family: popins;
+}
+.searchContainer {
+  min-height: 100vh;
+  max-width: 1000px;
+  margin: 10px auto;
+
+  .productCard {
+    width: 100%;
+    padding: 20px;
+    border-bottom: 2px solid #f3f4f6;
+    display: flex;
+    .image-container {
+      width: 250px;
+      height: 250px;
+      border-radius: 10px;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+        background: transparent;
+        mix-blend-mode: multiply;
+      }
+    }
+
+    .product-search-info {
+      margin-left: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      padding-left: 15px;
+      .btn-submit {
+        width: 200px;
+      }
+    }
+  }
+}
