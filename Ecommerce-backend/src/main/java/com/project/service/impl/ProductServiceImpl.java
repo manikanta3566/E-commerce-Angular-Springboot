@@ -4,8 +4,10 @@ import com.project.Exception.GlobalException;
 import com.project.dto.PaginatedResponse;
 import com.project.dto.ProductDto;
 import com.project.entity.Product;
+import com.project.entity.Role;
 import com.project.entity.User;
 import com.project.enums.ErrorCode;
+import com.project.enums.RoleType;
 import com.project.repository.ProductRepository;
 import com.project.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Base64;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -50,7 +55,12 @@ public class ProductServiceImpl  implements ProductService {
     @Transactional(readOnly = true)
     public PaginatedResponse<ProductDto> getProducts(int pageNumber, int pageSize, User user) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Product> productsPage = productRepository.findAllByCreatedById(user.getId(),pageable);
+        Page<Product> productsPage;
+        if(Objects.nonNull(user) && user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()).contains(RoleType.SELLER)) {
+            productsPage = productRepository.findAllByCreatedById(user.getId(),pageable);
+        }else{
+            productsPage = productRepository.findAll(pageable);
+        }
         PaginatedResponse<ProductDto> response = new PaginatedResponse<>();
         response.setContent(productsPage.map(this::convertToDto).getContent());
         response.setPageNumber(productsPage.getNumber());
@@ -96,6 +106,15 @@ public class ProductServiceImpl  implements ProductService {
             return convertToDto(updatedProduct);
         }
         return null;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ProductDto> searchProductsByName(String query) {
+        if (query == null || query.isEmpty()) {
+            return List.of(); // return empty list if query is empty
+        }
+        return productRepository.findByNameContainingIgnoreCase(query).stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     private ProductDto convertToDto(Product product) {

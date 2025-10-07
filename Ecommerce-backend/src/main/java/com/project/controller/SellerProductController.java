@@ -30,7 +30,7 @@ public class SellerProductController {
 
 
     @GetMapping
-    public ResponseEntity<GenricResponse<PaginatedResponse<ProductDto>>> getgetProductsPr(@RequestParam(defaultValue = "0") int pageNumber,
+    public ResponseEntity<GenricResponse<PaginatedResponse<ProductDto>>> getProducts(@RequestParam(defaultValue = "0") int pageNumber,
                                                                                                     @RequestParam(defaultValue = "10") int pageSize,
                                                                                                     @AuthenticationPrincipal User user) {
         return new ResponseEntity<>(GenricResponse.success(productService.getProducts(pageNumber, pageSize, user),

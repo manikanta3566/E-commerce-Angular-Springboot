@@ -4,6 +4,8 @@ import com.project.dto.PaginatedResponse;
 import com.project.dto.ProductDto;
 import com.project.entity.User;
 
+import java.util.List;
+
 public interface ProductService {
 
     ProductDto addProduct(ProductDto productDTO, User user);
@@ -13,4 +15,6 @@ public interface ProductService {
     String deleteProduct(String productId, User user);
 
     ProductDto updateProduct(String productId, ProductDto productDTO, User user);
+
+    List<ProductDto> searchProductsByName(String query);
 }
