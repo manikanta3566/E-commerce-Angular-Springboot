@@ -117,6 +117,13 @@ public class ProductServiceImpl  implements ProductService {
         return productRepository.findByNameContainingIgnoreCase(query).stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
+    @Override
+    public ProductDto getProductById(String id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new GlobalException(ErrorCode.PRODUCT_NOT_FOUND));
+        return convertToDto(product);
+    }
+
     private ProductDto convertToDto(Product product) {
         String base64Image = Base64.getEncoder().encodeToString(product.getImageData());
 

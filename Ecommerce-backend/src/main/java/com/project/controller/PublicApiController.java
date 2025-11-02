@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +32,11 @@ public class PublicApiController {
                                                                                      @AuthenticationPrincipal User user) {
         return new ResponseEntity<>(GenricResponse.success(productService.getProducts(pageNumber, pageSize, user),
                 "Products fetched successfully"), HttpStatus.OK);
+    }
+
+    @GetMapping("/products/{id}")
+    public ResponseEntity<GenricResponse<ProductDto>> getProductById(@PathVariable("id") String id) {
+        return new ResponseEntity<>(GenricResponse.success(productService.getProductById(id),
+                "Product fetched successfully"), HttpStatus.OK);
     }
 }
