@@ -19,7 +19,7 @@
     >
       <swiper-slide *ngFor="let p of swipperProducts">
         <div class="carousel-card">
-          <img
+          <a [routerLink]="['details', p.id]"><img
             [src]="
               p.base64Image
                 ? 'data:image/jpeg;base64,' + p.base64Image
@@ -27,6 +27,7 @@
             "
             alt="{{ p.name }}"
           />
+          </a>
           <h3>{{ p.name }}</h3>
           <p>{{ p.price | currency : "INR" : "symbol" : "1.0-0" }}</p>
         </div>
@@ -37,17 +38,17 @@
   <!-- Product Grid -->
   <div class="product-grid-container">
     <div class="product-card" *ngFor="let product of products">
-      <img
+      <a [routerLink]="['details', product.id]"><img
         [src]="
           product.base64Image
             ? 'data:image/jpeg;base64,' + product.base64Image
             : 'https://m.media-amazon.com/images/I/41hyMMjlg2L._SR480,440_.jpg'
         "
         alt="{{ product.name }}"
-      />
+      /></a>
       <h4>{{ product.name }}</h4>
       <p>₹{{ product.price }}</p>
-      <button>Veiw Details</button>
+      <button (click)="navigateToProductDetailsPage(product.id)">Veiw Details</button>
     </div>
   </div>
 

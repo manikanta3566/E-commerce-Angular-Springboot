@@ -6,6 +6,7 @@ import { authGuardGuard } from './auth-guard.guard';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { AddProductComponent } from './pages/add-product/add-product.component';
 import { SearchProductsComponent } from './pages/search-products/search-products.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 export const routes: Routes = [
     {
@@ -29,6 +30,10 @@ export const routes: Routes = [
     {
         component:SearchProductsComponent,
         path:'search/:query',
+    },
+        {
+        component:ProductDetailsComponent,
+        path:'details/:productId',
     },
     {
         component:PagenotfoundComponent,

@@ -28,4 +28,8 @@ export class ProductService {
   searchProducts(query:string){
     return this.http.get(`${API_URLS.BASE_URL}${API_URLS.PUBLIC_SEARCH_API}?query=${query}`)
   }
+
+  getProduct(productId:string){
+    return this.http.get(`${API_URLS.BASE_URL}${API_URLS.PUBLIC_GET_PRODUCT}/${productId}`)
+  }
 }

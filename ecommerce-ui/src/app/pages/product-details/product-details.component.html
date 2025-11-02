@@ -1,0 +1,31 @@
+<div class="product-details-container">
+  <div class="product-image">
+    <img
+        [src]="
+          product?.base64Image
+            ? 'data:image/jpeg;base64,' + product?.base64Image
+            : 'https://m.media-amazon.com/images/I/41hyMMjlg2L._SR480,440_.jpg'
+        "
+        alt="{{ product?.name }}"
+      />
+  </div>
+
+  <div class="product-info">
+    <h1 class="product-name">{{ product?.name }}</h1>
+    <p class="product-description">{{ product?.description }}</p>
+
+    <div class="product-price">
+      ₹{{ product?.price }}
+    </div>
+
+    <div class="quantity-section">
+      <button mat-mini-fab color="primary" (click)="decreaseQty()">-</button>
+      <span class="quantity">{{ quantity }}</span>
+      <button mat-mini-fab color="primary" (click)="increaseQty()">+</button>
+    </div>
+
+    <button mat-raised-button color="accent" class="add-to-cart-btn">
+      Add to Cart
+    </button>
+  </div>
+</div>

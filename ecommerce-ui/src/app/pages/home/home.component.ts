@@ -8,10 +8,11 @@ import { MatCardModule } from '@angular/material/card';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, MatCardModule,MatIconModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -39,7 +40,7 @@ export class HomeComponent {
   // Sentinel div to detect scroll for infinite loading
   @ViewChild('scrollAnchor') scrollAnchor!: ElementRef;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,private router: Router) {}
 
   /** 
    * ngOnInit
@@ -105,5 +106,9 @@ export class HomeComponent {
         this.loading = false; // Reset loading flag even on error
       }
     );
+  }
+
+  navigateToProductDetailsPage(id:string){
+  this.router.navigate([`details/${id}`]);
   }
 }
